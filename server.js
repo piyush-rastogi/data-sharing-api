@@ -5,10 +5,10 @@ const PORT = process.env.PORT || 4000;
 const path = require('path');
 const cors = require('cors');
 // Cors 
-const corsOptions = {
-  origin: '*'
-  ['http://localhost:3000', 'http://data-sharing.techstudere.com/']
-}
+// const corsOptions = {
+//   origin: '*'
+//   ['http://localhost:3000', 'http://data-sharing.techstudere.com/']
+// }
 
 // Default configuration looks like
 // {
@@ -18,7 +18,7 @@ const corsOptions = {
 //     "optionsSuccessStatus": 204
 //   }
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
 app.use(express.static('public'));
 
 const connectDB = require('./config/db');
@@ -30,6 +30,11 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
 
 // Routes 
+app.all('/*', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "*");
+  next();
+});
 app.use('/api/files', require('./routes/files'));
 app.use('/files', require('./routes/show'));
 app.use('/files/download', require('./routes/download'));
