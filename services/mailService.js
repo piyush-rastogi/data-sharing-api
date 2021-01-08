@@ -1,12 +1,12 @@
 const nodemailer = require("nodemailer");
 module.exports = async ({ from, to, subject, text, html}) => {
         let transporter = nodemailer.createTransport({
-            host: process.env.SMTP_HOST,
-            port: process.env.SMTP_PORT,
+            host: "smtp-relay.gmail.com",
+            port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-                user: process.env.MAIL_USER, // generated ethereal user
-                pass: process.env.MAIL_PASSWORD, // generated ethereal password
+                user: "rastogi.piyush026@gmail.com",
+                pass: "rzocoppnfxabkank", // generated ethereal password
             },
         });
 
